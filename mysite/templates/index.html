@@ -1,0 +1,50 @@
+
+{{ django_message }}
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <!-- Embedded data (from server) -->
+    <script>
+      const dayData = [
+        {
+          id: "day-1",
+          name: "Monday",
+          rooms: [
+            { id: "E103", name: "Euler 103" },
+            { id: "E109", name: "Euler 109" },
+            { id: "N123", name: "Nussbaum 123" },
+          ],
+        },
+        {
+          id: "day-2",
+          name: "Wednesday",
+          rooms: [
+            { id: "E103", name: "Euler 103" },
+            { id: "E109", name: "Euler 109" },
+          ],
+        },
+        {
+          id: "day-3",
+          name: "Friday",
+          rooms: [
+            { id: "E109", name: "Euler 109" },
+            { id: "N123", name: "Nussbaum 123" },
+          ],
+        },
+      ];
+    </script>
+
+    <div id="app">
+        <p>The following message is from vue and uses square braces as alternative delimiters: [[ message ]]</p>
+        <form method="post">
+                <!-- Illustrating use of child component -->
+                <day-picker v-for="day in days" :day="day" :key="day.id"></day-picker>
+                
+                <!-- Ordinary form submission -->
+                <input type="submit" value="Book My Room(s)" />
+        </form>
+    </div>
+
+    <script>
+        {% include "vue/rooms.js" %}
+   </script>
